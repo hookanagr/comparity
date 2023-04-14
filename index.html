@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Offer Calculator</title>
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   </head>
+  <body>
+    <div class="container">
+      <header>
+        <img src="images/logo.png" alt="Logo">
+        <h1>Best Offer Calculator</h1>
+        
+      </header>
+      <form class="mmenu" style="display: none;"><nav>
+        <ul>
+          <li ><i class="fas fa-flag"></i>option first</li>
+          <li ><button id="info-btn" class="floating-btn">i</button></li>
+        </ul>
+      </nav></form>
+      <button id="info-button" class="floating-button">i</button>
+      <div id="info-popup" class="popup">
+        <div class="popup-content">
+          <span class="close-button">&times;</span>
+          <p>Αυτή είναι μια εφαρμογή όπου μπορείτε να κάνετε μια λίστα με πράγματα που θέλετε να αγοράσετε. Μπορείτε να προσθέσετε στοιχεία στη λίστα πληκτρολογώντας και την τιμή τους και, στη συνέχεια, κάνοντας κλικ σε ένα κουμπί. Ο ιστότοπος θα σας εμφανίσει τη λίστα με τα είδη που καταχωρίσατε και θα υπολογίσει απο την λίστα ποιο αντικείμενο είναι η καλύτερη προσφορά.</p>
+
+          <p>Εάν θέλετε να αφαιρέσετε ένα στοιχείο από τη λίστα, μπορείτε να κάνετε κλικ σε ένα κουμπί δίπλα σε αυτό το στοιχείο [Χ]. Εάν θέλετε να αφαιρέσετε όλα τα στοιχεία από τη λίστα, μπορείτε να κάνετε κλικ στο κουμπί [Clear Items].</p>
+      
+          <p>Ο ιστότοπος θα θυμάται τη λίστα των στοιχείων που εισαγάγατε, επομένως εάν επιστρέψετε στον ιστότοπο αργότερα, θα εξακολουθείτε να βλέπετε τη λίστα σας.</p>
+        </div>
+      </div>
+      <form>
+        <nav>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="language-btn" data-bs-toggle="dropdown" aria-expanded="false">
+              Language
+            </button>
+            <ul class="dropdown-content" aria-labelledby="language-btn" id="language-select">
+              <li  data-lang="en"><img src="images/uk.png" alt="English" style="
+                width: 2em;
+            "></li>
+              <li data-lang="el"><img src="images/gr.png" alt="Greek" style="
+                width: 2em;
+            "></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="color-menu-btn" data-bs-toggle="dropdown" aria-expanded="false">
+              Color
+            </button>
+            <ul class="dropdown-content" aria-labelledby="color-menu-btn" id="color-menu">
+              <li><a class="dropdown-item" href="#" onclick="changeColor('#1f76cd')" title="Blue"><div class="color-icon" style="background-color: #1f76cd;">🎨</div></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeColor('rgb(241 199 17)')" title="Yellow"><div class="color-icon" style="background-color: rgb(241 199 17);">🎨</div></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeColor('#cd1f1f')" title="Red"><div class="color-icon" style="background-color: #cd1f1f;">🎨</div></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeColor('#1fcd61')" title="Green"><div class="color-icon" style="background-color: #1fcd61;">🎨</div></a></li>
+            </ul>
+          </div>
+        </nav>
+        <fieldset data-i18n="best-offer">
+          <legend data-i18n="best-offer">Best Offer</legend>
+          <div id="price-per-amount"></div>
+        </fieldset>
+        <fieldset data-i18n="product-details">
+          <legend data-i18n="product-details">Product Details</legend>
+          <div class="input-group">
+            <label for="price" data-i18n="price-label">Price (in Euro <b>€</b>) :</label>
+            <input type="number" id="price" name="price" required>
+          </div>
+          <div class="input-group">
+            <label for="amount" data-i18n="amount-label">Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+          </div>
+          <div class="button-group">
+            <button type="button" id="add-item" data-i18n="add-item-button">Add Item</button>
+            <button type="button" id="clear-items" data-i18n="clear-items-button">Clear Items</button>
+          </div>
+        </fieldset>
+        <fieldset data-i18n="items">
+          <legend data-i18n="items">Items</legend>
+          <div id="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="id">ID</th>
+                <th data-i18n="price">Price (in Euro <b>€</b>)</th>
+                <th data-i18n="amount">Amount</th>
+                <th data-i18n="cost-per-unit">Cost per unit 📦</th>
+                <th data-i18n="actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="items"></tbody>
+          </table>
+        </div>
+        </fieldset>
+       
+      </form>
+    </div>
+    <script src="js/script.js"></script>
+    <div style="font-size: 14px; text-align: center; margin-top: 20px;">
+      This program has been created by AGGELOS TSOUKAS for personal usage and friends &#10084;
+    </div>
+  </body>
+</html>
